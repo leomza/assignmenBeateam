@@ -33,9 +33,9 @@
                             <span class="badge"
                                 [ngClass]="{'bg-secondary': task.estado == 'Pendiente', 'bg-success': task.estado == 'Entregada', 'bg-info': task.estado == 'Desconsolidada'}">{{task.estado}}</span>
                         </td>
-                        <td>{{task.fecha}}</td>
+                        <td>{{task.fecha | date: "HH:mm"}} <small style="font-size: 12px;">{{task.fecha | date: "dd LLL ''yy"}}</small> </td>
                         <td class="text-center"><span class="badge"
-                                [ngClass]="{'bg-primary': task.tipo == 'Mesa', 'bg-success': task.tipo == 'Ruta'}">{{task.tipo}}</span>
+                                [ngClass]="{'bg-primary': task.tipo == 'Mesa', 'bg-success': task.tipo == 'Ruta'}">{{task.tipo | slice:0:1}}</span>
                         </td>
                         <td class="text-right"><small style="font-size: 10px;">{{task.codigo_cliente}}</small>
                             {{task.alias_cliente}}</td>
