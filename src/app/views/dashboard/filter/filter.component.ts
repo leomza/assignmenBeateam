@@ -82,6 +82,5 @@ export class FilterComponent implements OnInit {
         break;
     }
   }
-
-
 }
+

@@ -46,7 +46,6 @@ export class ApiService {
       taskDate: form.taskDate,
       estado: form.taskState,
     };
-    console.log(params);
     return this.http.get<any>(environment.api_url, { params: params, headers: headers })
   }
 }

@@ -1,19 +1,19 @@
 <form class="mt-2" [formGroup]="filterForm" (ngSubmit)="onFilter(filterForm.value)">
     <label for="client">Cliente:</label>
     <div class="input-group pb-2">
-        <input type="text" class="form-control" id="client" formControlName="client">
+        <input type="text" class="form-control" id="client" formControlName="client" autocomplete="off">
         <button class="btn btn-outline-danger" type="button" (click)="handleClear('client')">X</button>
     </div>
 
     <label for="reference">Referencia:</label>
     <div class="input-group pb-2">
-        <input type="text" class="form-control" id="reference" formControlName="reference">
+        <input type="text" class="form-control" id="reference" formControlName="reference" autocomplete="off">
         <button class="btn btn-outline-danger" type="button" (click)="handleClear('reference')">X</button>
     </div>
 
     <label for="user">Usuario:</label>
     <div class="input-group pb-2">
-        <input type="text" class="form-control" id="user" formControlName="user">
+        <input type="text" class="form-control" id="user" formControlName="user" autocomplete="off">
         <button class="btn btn-outline-danger" type="button" (click)="handleClear('user')">X</button>
     </div>
 
@@ -31,14 +31,14 @@
         <button class="btn btn-outline-danger" type="button" (click)="handleClear('taskType')">X</button>
     </div>
 
-    <div class="form-group pb-2">
-        <label for="state">Estado:</label>
-        <div class="form-check border" *ngFor="let taskState of taskStates">
+    <label for="state">Estado:</label>
+    <div class="form-group pb-2 border">
+        <div class="form-check m-1" *ngFor="let taskState of taskStates">
             <input type="checkbox" class="form-check-input" name={{taskState}} [checked]="checked(taskState)"
                 (change)="onChange($event.target, taskState)">{{taskState}}
             <label class="form-check-label" for={{taskState}}></label>
         </div>
     </div>
 
-    <button class="btn btn-outline-primary btn-block w-100" type="submit"> <i class="fas fa-search"></i> Buscar</button>
+    <button class="btn btn-outline-primary btn-block w-100 mt-2" type="submit"> <i class="fas fa-search"></i> Buscar</button>
 </form>

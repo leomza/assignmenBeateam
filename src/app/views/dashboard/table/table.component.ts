@@ -1,13 +1,13 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { ApiService } from '../../services/api/api.service'
-import { ListTasksInterface } from '../../models/listTasks.interface'
+import { ApiService } from '../../../services/api/api.service'
+import { ListTasksInterface } from '../../../models/listTasks.interface'
 
 @Component({
-  selector: 'app-main',
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.css']
+  selector: 'app-table',
+  templateUrl: './table.component.html',
+  styleUrls: ['./table.component.css']
 })
-export class MainComponent implements OnInit {
+export class TableComponent implements OnInit {
 
   tasks: ListTasksInterface[] = [];
   //Page to paginate:

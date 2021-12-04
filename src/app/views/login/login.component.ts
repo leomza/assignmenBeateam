@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   //If the variable token exist in the localStorage I will redirect directly to the main page
   checkLocalStorage() {
     if (localStorage.getItem('token')) {
-      this.router.navigate(['main'])
+      this.router.navigate(['dashboard'])
     }
   }
 
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
         //If the login is succesfully I will save the token in the localStorage
         if (dataResponse.status === 200) {
           localStorage.setItem('token', userInfoEncrypt)
-          this.router.navigate(['main'])
+          this.router.navigate(['dashboard'])
         }
       }, error: (errorRes) => {
         this.errorStatus = true;

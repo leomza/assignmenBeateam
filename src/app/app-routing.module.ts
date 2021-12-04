@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './views/login/login.component';
-import { MainComponent } from './views/main/main.component';
+import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'main', component: MainComponent },
+  { path: 'dashboard', component: DashboardComponent },
   { path: '**', component: NotFoundComponent }
 
 ];
@@ -18,4 +18,4 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 //I will export the routing of the components to import it in "app.module.ts":
-export const routingComponents = [LoginComponent, MainComponent, NotFoundComponent];
+export const routingComponents = [LoginComponent, DashboardComponent, NotFoundComponent];
