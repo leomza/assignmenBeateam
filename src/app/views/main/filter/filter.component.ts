@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../../services/api/api.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-filter',
@@ -16,6 +16,7 @@ export class FilterComponent implements OnInit {
     client: new FormControl(''),
     reference: new FormControl(''),
     user: new FormControl(''),
+    taskDate: new FormControl(''),
     taskType: new FormControl(''),
     taskState: new FormControl(''),
   })
@@ -70,6 +71,9 @@ export class FilterComponent implements OnInit {
         break;
       case 'user':
         this.filterForm.patchValue({ user: '' });
+        break;
+      case 'taskDate':
+        this.filterForm.patchValue({ taskDate: '' });
         break;
       case 'taskType':
         this.filterForm.patchValue({ taskType: '' });

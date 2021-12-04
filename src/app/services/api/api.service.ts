@@ -43,6 +43,7 @@ export class ApiService {
       reference: form.reference,
       usuario: form.user,
       taskType: form.taskType,
+      taskDate: form.taskDate,
       estado: form.taskState,
     };
     console.log(params);

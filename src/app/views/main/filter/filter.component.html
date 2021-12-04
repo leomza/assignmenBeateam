@@ -17,6 +17,12 @@
         <button class="btn btn-outline-danger" type="button" (click)="handleClear('user')">X</button>
     </div>
 
+    <label for="date">Fecha:</label>
+    <div class="input-group pb-2">
+        <input type="date" class="form-control" id="date" formControlName="taskDate">
+        <button class="btn btn-outline-danger" type="button" (click)="handleClear('taskDate')">X</button>
+    </div>
+
     <label for="type">Tipo</label>
     <div class="input-group pb-2">        
         <select class="form-control form-select" id="type" formControlName="taskType">

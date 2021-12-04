@@ -1,4 +1,8 @@
-<div class="container-fluid">
+<div class="col text-center" *ngIf="loading">
+    <img src="../../../assets/loader.gif" alt="Loading...">
+</div>
+
+<div class="container-fluid" *ngIf="tasks">
     <div class="row">
         <div class="col-2">
             <app-filter></app-filter>
@@ -19,7 +23,7 @@
                 <tbody>
                     <tr *ngFor="let task of tasks | paginate:{itemsPerPage:items, currentPage: p};">
                         <td><img width="80" src={{task.logo}} alt="Logo del Producto"> {{task.referencia}}</td>
-                        <td><i [ngClass]="task.observacion != '' ? 'fas fa-exclamation-circle text-warning' : 'fas fa-info-circle text-primary'"
+                        <td><i role="button" [ngClass]="task.observacion != '' ? 'fas fa-exclamation-circle text-warning' : 'fas fa-info-circle text-primary'"
                                 [ngbPopover]="templatePopover" placement="bottom" triggers="mouseenter:mouseleave"></i>
                         </td>
 
