@@ -1,0 +1,22 @@
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <img src="../../../assets/assignmentLogo.jpg" id="icon" alt="User Icon" />
+        </div>
+
+        <!-- Login Form -->
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm.value)">
+            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Enter you private key" autocomplete="off"
+                formControlName="privateKey">
+            <input type="submit" class="fadeIn fourth" value="Log In">
+        </form>
+
+        <div class="alert alert-danger" *ngIf="errorStatus">
+            <p>{{errorMessage}}</p>
+        </div>
+
+    </div>
+</div>

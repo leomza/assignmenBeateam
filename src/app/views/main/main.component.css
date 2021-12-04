@@ -1,0 +1,8 @@
+td{
+    border-bottom: 1px solid gray
+}
+
+.pagination__container{
+    text-align: end;
+    color: #2199E8;
+}
