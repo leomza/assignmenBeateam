@@ -19,8 +19,15 @@
                 <tbody>
                     <tr *ngFor="let task of tasks | paginate:{itemsPerPage:items, currentPage: p};">
                         <td><img width="80" src={{task.logo}} alt="Logo del Producto"> {{task.referencia}}</td>
-                        <td><span class="badge rounded-pill bg-success" ngbPopover="Obs. linea:"
-                                triggers="mouseenter:mouseleave">i</span></td>
+                        <td><i [ngClass]="task.observacion != '' ? 'fas fa-exclamation-circle text-warning' : 'fas fa-info-circle text-primary'"
+                                [ngbPopover]="templatePopover" placement="bottom" triggers="mouseenter:mouseleave"></i>
+                        </td>
+
+                        <ng-template #templatePopover>
+                            <p><b>Obs. linea: </b>{{task.observacion}}</p>
+                            <p><b>Pedido por: </b>{{task.usuario}}</p>
+                        </ng-template>
+
                         <td>x{{task.cantidad}}</td>
                         <td class="text-center">
                             <span class="badge"
