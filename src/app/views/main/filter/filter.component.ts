@@ -13,11 +13,11 @@ export class FilterComponent implements OnInit {
   taskTypes: any[] = [];
 
   filterForm = new FormGroup({
-    client: new FormControl(),
-    reference: new FormControl(),
-    user: new FormControl(),
-    taskType: new FormControl(),
-    taskState: new FormControl(),
+    client: new FormControl(''),
+    reference: new FormControl(''),
+    user: new FormControl(''),
+    taskType: new FormControl(''),
+    taskState: new FormControl(''),
   })
 
   selectedStates: Array<any> = [];
@@ -59,4 +59,25 @@ export class FilterComponent implements OnInit {
       console.log(this.dataFiltered);
     })
   }
+
+  handleClear(itemToClear: string) {
+    switch (itemToClear) {
+      case 'client':
+        this.filterForm.patchValue({ client: '' });
+        break;
+      case 'reference':
+        this.filterForm.patchValue({ reference: '' });
+        break;
+      case 'user':
+        this.filterForm.patchValue({ user: '' });
+        break;
+      case 'taskType':
+        this.filterForm.patchValue({ taskType: '' });
+        break;
+      default:
+        break;
+    }
+  }
+
+
 }
