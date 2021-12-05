@@ -1,5 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
-import { ApiService } from '../../../services/api/api.service'
+import { Component, OnInit, HostListener, Input } from '@angular/core';
 import { ListTasksInterface } from '../../../models/listTasks.interface'
 
 @Component({
@@ -9,29 +8,23 @@ import { ListTasksInterface } from '../../../models/listTasks.interface'
 })
 export class TableComponent implements OnInit {
 
-  tasks: ListTasksInterface[] = [];
+  @Input() tasks: ListTasksInterface[] = [];
   //Page to paginate:
   p: number = 1;
   //Set the number of items per page:
   items: number = 0;
 
-  loading: boolean = true;
-  getScreenHeight: any;
+  getScreenHeight: number = 0;
 
-  constructor(private api: ApiService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.api.getAllTasks().subscribe(data => {
-      this.tasks = data.data
-      this.loading = false;
-    })
-    //When I start the page, I set how many items to show due the size screen (55 is the number of pixels per row)
+    //Set how many items are going to show due the size screen (55 is the number of pixels per row)
     this.getScreenHeight = window.innerHeight;
     this.items = (Math.floor(this.getScreenHeight / 55));
   }
 
   @HostListener('window:resize', ['$event'])
-
   onWindowResize() {
     this.getScreenHeight = window.innerHeight;
     //When I change the size of the screen, I calculate the number of items again

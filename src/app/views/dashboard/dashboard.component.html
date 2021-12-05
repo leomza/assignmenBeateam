@@ -1,10 +1,15 @@
+<div class="col text-center" *ngIf="loading">
+    <img src="../../../assets/loader.gif" alt="Loading...">
+</div>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-2">
-            <app-filter></app-filter>
+            <app-filter (sendTasksInformation)="recieveInformationTasks($event)"
+                (sendLoadingInformation)="recieveInformationLoading($event)"></app-filter>
         </div>
         <div class="col-10">
-            <app-table></app-table>
+            <app-table *ngIf="tasks.length > 0" [tasks]="tasks"></app-table>
         </div>
     </div>
 </div>

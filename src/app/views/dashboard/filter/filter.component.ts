@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ApiService } from '../../../services/api/api.service';
 import { FormGroup, FormControl } from '@angular/forms';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-filter',
@@ -9,8 +10,11 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class FilterComponent implements OnInit {
 
-  taskStates: any[] = [];
-  taskTypes: any[] = [];
+  taskStates: Array<any> = [];
+  taskTypes: Array<any> = [];
+  dataFiltered: any = [];
+  loading: boolean = true;
+  selectedStates: Array<any> = [];
 
   filterForm = new FormGroup({
     client: new FormControl(''),
@@ -21,12 +25,13 @@ export class FilterComponent implements OnInit {
     taskState: new FormControl(''),
   })
 
-  selectedStates: Array<any> = [];
-  dataFiltered: any = []
+  //Outputs to send the information to the Component Dashboard
+  @Output() sendTasksInformation = new EventEmitter()
+  @Output() sendLoadingInformation = new EventEmitter()
 
   constructor(private api: ApiService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.api.getTaskStates().subscribe(data => {
       this.taskStates = data.data
     })
@@ -34,17 +39,19 @@ export class FilterComponent implements OnInit {
     this.api.getTaskTypes().subscribe(data => {
       this.taskTypes = data.data
     })
+
+    this.onFilter(this.filterForm.value)
   }
 
-  // check if the item are selected
-  checked(taskState: any): any {
+  //Check if the item are selected
+  checked(taskState: string): any {
     if (this.selectedStates.indexOf(taskState) != -1) {
       return true;
     }
   }
 
-  // when checkbox change, add/remove the item from the array
-  onChange(checked: any, taskState: any) {
+  //When checkbox change, add/remove the item from the array
+  onChange(checked: any, taskState: string) {
     if (checked.checked) {
       this.selectedStates.push(taskState);
     } else {
@@ -52,13 +59,13 @@ export class FilterComponent implements OnInit {
     }
   }
 
-  onFilter(form: any) {
+  async onFilter(form: any) {
     form.taskState = this.selectedStates;
-    console.log(form);
-    this.api.getAllTasksFiltered(form).subscribe(data => {
-      this.dataFiltered = data.data
-      console.log(this.dataFiltered);
-    })
+    const dataFiltered$: any = this.api.getAllTasks(form);
+    this.dataFiltered = await lastValueFrom(dataFiltered$);
+    this.sendTasksInformation.emit(this.dataFiltered.data)
+    this.loading = false;
+    this.sendLoadingInformation.emit(this.loading)
   }
 
   handleClear(itemToClear: string) {
@@ -83,4 +90,3 @@ export class FilterComponent implements OnInit {
     }
   }
 }
-

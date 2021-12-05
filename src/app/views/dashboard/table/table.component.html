@@ -1,8 +1,4 @@
-<div class="col text-center" *ngIf="loading">
-    <img src="../../../assets/loader.gif" alt="Loading...">
-</div>
-
-<div *ngIf="tasks && !loading">
+<div *ngIf="tasks">
     <table class="table table-hover table-borderless">
         <thead>
             <tr>
@@ -33,8 +29,7 @@
                     <span class="badge"
                         [ngClass]="{'bg-secondary': task.estado == 'Pendiente', 'bg-success': task.estado == 'Entregada', 'bg-info': task.estado == 'Desconsolidada'}">{{task.estado}}</span>
                 </td>
-                <td>{{task.fecha | date: "HH:mm"}} <small style="font-size: 12px;">{{task.fecha | date: "dd LLL
-                        ''yy"}}</small> </td>
+                <td>{{task.fecha | date: "HH:mm"}} <small style="font-size: 12px;">{{task.fecha | date: "dd LLL ''yy"}}</small> </td>
                 <td class="text-center"><span class="badge"
                         [ngClass]="{'bg-primary': task.tipo == 'Mesa', 'bg-success': task.tipo == 'Ruta'}">{{task.tipo |
                         slice:0:1}}</span>
@@ -48,4 +43,4 @@
     <pagination-controls class="pagination__container" nextLabel="" previousLabel="" [maxSize]="10"
         (pageChange)="p = $event">
     </pagination-controls>
-</div>
+</div>  

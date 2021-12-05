@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ListTasksInterface } from 'src/app/models/listTasks.interface';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
+  tasks: Array<ListTasksInterface> = [];
+  loading: boolean = true;
+
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  //Information from the component "Filter"
+  recieveInformationTasks(tasksFiltered: Array<ListTasksInterface>) {
+    this.tasks = tasksFiltered;
   }
 
+  //Information from the component "Filter"
+  recieveInformationLoading(loadingInfo: boolean) {
+    this.loading = loadingInfo;
+  }
 }
