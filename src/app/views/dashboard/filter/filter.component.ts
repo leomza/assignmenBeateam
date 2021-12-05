@@ -21,8 +21,8 @@ export class FilterComponent implements OnInit {
     reference: new FormControl(''),
     user: new FormControl(''),
     taskDate: new FormControl(''),
-    taskType: new FormControl(''),
-    taskState: new FormControl(''),
+    taskType: new FormControl([]),
+    taskState: new FormControl([]),
   })
 
   //Outputs to send the information to the Component Dashboard
@@ -83,7 +83,7 @@ export class FilterComponent implements OnInit {
         this.filterForm.patchValue({ taskDate: '' });
         break;
       case 'taskType':
-        this.filterForm.patchValue({ taskType: '' });
+        this.filterForm.patchValue({ taskType: [] });
         break;
       default:
         break;

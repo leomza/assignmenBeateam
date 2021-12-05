@@ -29,25 +29,17 @@ export class ApiService {
     return this.http.get<ResponseInterface>(environment.api_url, { headers: headers })
   }
 
-  getAllTasks(form: any): Observable<ListTasksInterface> {
+  getAllTasks(form: any): Observable<any> {
     const token = localStorage.getItem('token')
     const headers = { 'funcion': 'getTareas', 'X-Auth': `${token}` }
     const params = {
-      cliente: form.client,
-      referencia: form.reference,
-      usuario: form.user,
-      tipo: form.taskType,
-      fecha: form.taskDate,
-      estado: form.taskState,
-    };/* 
-    const taskTypeArray = form.taskType.split(",")
-    console.log(taskTypeArray);
-    const pepe = taskTypeArray.reduce((p:any, id:any) => {
-      p.push('tipo[]', id)
-      return p
-    }, []);
-    console.log(pepe); */
-    console.log(environment.api_url+`?tipo[]=${form.taskType}`);
-    return this.http.get<ListTasksInterface>(environment.api_url, { params: params, headers: headers })
+      'cliente': form.client,
+      'referencia': form.reference,
+      'usuario': form.user,
+      'tipo[]': form.taskType,
+      'fecha': form.taskDate,
+      'estado[]': form.taskState,
+    };
+    return this.http.get<any>(environment.api_url, { params: params, headers: headers })
   }
 }
