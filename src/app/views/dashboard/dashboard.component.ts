@@ -10,6 +10,8 @@ export class DashboardComponent implements OnInit {
 
   tasks: Array<ListTasksInterface> = [];
   loading: boolean = true;
+  //Propery to send to Filter Component:
+  finishLoading : boolean = false;
 
   constructor() { }
 
@@ -23,5 +25,6 @@ export class DashboardComponent implements OnInit {
   //Information from the component "Filter"
   recieveInformationLoading(loadingInfo: boolean) {
     this.loading = loadingInfo;
+    this.finishLoading = true;
   }
 }

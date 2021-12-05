@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-2">
             <app-filter (sendTasksInformation)="recieveInformationTasks($event)"
-                (sendLoadingInformation)="recieveInformationLoading($event)"></app-filter>
+                (sendLoadingInformation)="recieveInformationLoading($event)" [finishLoading]="finishLoading"></app-filter>
         </div>
         <div class="col-10">
             <app-table *ngIf="tasks.length > 0" [tasks]="tasks"></app-table>

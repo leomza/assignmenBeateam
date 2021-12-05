@@ -1,7 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ApiService } from '../../../services/api/api.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { lastValueFrom } from 'rxjs';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-filter',
@@ -14,13 +15,14 @@ export class FilterComponent implements OnInit {
   taskTypes: Array<any> = [];
   dataFiltered: any = [];
   loading: boolean = true;
-  selectedStates: Array<any> = [];
+  selectedStates: Array<string> = [];
+  selectedDate: object;
 
   filterForm = new FormGroup({
     client: new FormControl(''),
     reference: new FormControl(''),
     user: new FormControl(''),
-    taskDate: new FormControl(''),
+    taskDate: new FormControl(),
     taskType: new FormControl([]),
     taskState: new FormControl([]),
   })
@@ -28,6 +30,9 @@ export class FilterComponent implements OnInit {
   //Outputs to send the information to the Component Dashboard
   @Output() sendTasksInformation = new EventEmitter()
   @Output() sendLoadingInformation = new EventEmitter()
+
+  //Input from the Component Dashboard when the loading is ready
+  @Input() finishLoading: boolean = false;
 
   constructor(private api: ApiService) { }
 
@@ -60,7 +65,10 @@ export class FilterComponent implements OnInit {
   }
 
   async onFilter(form: any) {
+    //Set the selected state to the form:
     form.taskState = this.selectedStates;
+    //Set the selected date to the form:
+    form.taskDate = this.selectedDate;
     const dataFiltered$: any = this.api.getAllTasks(form);
     this.dataFiltered = await lastValueFrom(dataFiltered$);
     this.sendTasksInformation.emit(this.dataFiltered.data)
@@ -87,6 +95,20 @@ export class FilterComponent implements OnInit {
         break;
       default:
         break;
+    }
+  }
+
+  setDate(dateFromInput: any) {
+    //Check if the variable is not null
+    if (dateFromInput.startDate) {
+      const startDate = dateFromInput.startDate._d;
+      const startDateFormated = moment(startDate).format('YYYY-MM-DD');
+
+      const endDate = dateFromInput.endDate._d;
+      const endDateFormated = moment(endDate).format('YYYY-MM-DD')
+      this.selectedDate = { 'inicio': startDateFormated, 'fin': endDateFormated };
+    } else {
+      this.selectedDate = { 'inicio': '', 'fin': '' };
     }
   }
 }

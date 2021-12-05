@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ResponseInterface } from '../../models/response.interface';
-import { HttpClient, HttpParams } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs'
 import { environment } from '../../../environments/environment'
-import { ListTasksInterface } from 'src/app/models/listTasks.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -32,12 +31,17 @@ export class ApiService {
   getAllTasks(form: any): Observable<any> {
     const token = localStorage.getItem('token')
     const headers = { 'funcion': 'getTareas', 'X-Auth': `${token}` }
+    //If the start date doesn't exist I will set to an empty string:
+    if (!form.taskDate) {
+      form.taskDate = { "inicio": '', "fin": '' }
+    }
     const params = {
       'cliente': form.client,
       'referencia': form.reference,
       'usuario': form.user,
       'tipo[]': form.taskType,
-      'fecha': form.taskDate,
+      'fecha[inicio]': form.taskDate.inicio,
+      'fecha[fin]': form.taskDate.fin,
       'estado[]': form.taskState,
     };
     return this.http.get<any>(environment.api_url, { params: params, headers: headers })

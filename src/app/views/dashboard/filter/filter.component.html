@@ -1,4 +1,4 @@
-<form class="mt-2" [formGroup]="filterForm" (ngSubmit)="onFilter(filterForm.value)">
+<form *ngIf="finishLoading" class="mt-2" [formGroup]="filterForm" (ngSubmit)="onFilter(filterForm.value)">
     <label for="client">Cliente:</label>
     <div class="input-group pb-2">
         <input type="text" class="form-control" id="client" formControlName="client" autocomplete="off">
@@ -19,7 +19,7 @@
 
     <label for="date">Fecha:</label>
     <div class="input-group pb-2">
-        <input type="date" class="form-control" id="date" formControlName="taskDate">
+        <input type="text" class="form-control" id="date" formControlName="taskDate" ngxDaterangepickerMd [autoApply]="true" (change)="setDate($event)" autocomplete="off">
         <button class="btn btn-outline-danger" type="button" (click)="handleClear('taskDate')">X</button>
     </div>
 

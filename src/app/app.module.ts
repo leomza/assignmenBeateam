@@ -15,6 +15,7 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { FilterComponent } from './views/dashboard/filter/filter.component';
 import { TableComponent } from './views/dashboard/table/table.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { NotFoundComponent } from './views/not-found/not-found.component';
     NgxPaginationModule,
     Ng2OrderModule,
     Ng2SearchPipeModule,
-    NgbModule
+    NgbModule,
+    NgxDaterangepickerMd.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
